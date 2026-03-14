@@ -1,0 +1,174 @@
+@media screen and (max-width: 320px) {
+  .card {
+    background-color: #1e293b; /* Deep Slate */
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nameButton {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .inviteButton,
+  .deleteButton {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+
+}
+
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .card {
+    background-color: #1e293b; /* Deep Slate */
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nameButton {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .inviteButton,
+  .deleteButton {
+    flex: 1;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    border-radius: 10px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .card {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 1.25rem;
+    background: #1e293b;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .inviteButton,
+  .deleteButton {
+    padding: 0.35rem 0.6rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+}
+
+.nameButton:hover {
+  text-decoration: underline;
+}
+
+.deleteButton:hover {
+  background-color: #c64541;
+}
+
+.inviteButton {
+  background-color: #22c55e;
+  color: white;
+}
+
+.inviteButton:hover {
+  background-color: #3a78c2;
+}
+
+.deleteButton {
+  background-color: #ef4444;
+  color: white;
+}
+
+.nameButton {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.meta {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}

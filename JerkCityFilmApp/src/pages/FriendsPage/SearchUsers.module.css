@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.resultRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.resultRow:hover {
+  background: #f5f5f5;
+}
+
+.username {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.status {
+  font-size: 0.8rem;
+  color: #777;
+}

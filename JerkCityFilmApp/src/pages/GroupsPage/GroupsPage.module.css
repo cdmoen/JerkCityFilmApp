@@ -1,0 +1,147 @@
+@media screen and (max-width: 320px) {
+  .title {
+    text-align: center;
+  }
+
+  /* Create button */
+  .createButton {
+    padding: 0.6rem 1rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  /* Section titles */
+  .sectionTitle {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .title {
+    text-align: center;
+  }
+
+  /* Create button */
+  .createButton {
+    padding: 0.6rem 1rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  /* Section titles */
+  .sectionTitle {
+    text-align: center;
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+  /* Create button */
+  .createButton {
+    padding: 0.6rem 1rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: fit-content;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Section titles */
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+/* Create form wrapper */
+.formWrapper {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+/* Lists */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.listItem {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+/* Group name text */
+.groupName {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Buttons */
+.buttonRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.acceptButton {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.rejectButton {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Empty state */
+.empty {
+  color: #777;
+  font-style: italic;
+  padding: 0.5rem 0;
+}

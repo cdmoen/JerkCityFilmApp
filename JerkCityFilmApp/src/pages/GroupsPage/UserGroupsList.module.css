@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty {
+  color: #888;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.loading {
+  color: #666;
+  margin-top: 8px;
+}

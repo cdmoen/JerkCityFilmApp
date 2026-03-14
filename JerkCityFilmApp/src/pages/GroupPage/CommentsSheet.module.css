@@ -1,0 +1,68 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.sheet {
+  width: 100%;
+  max-height: 75vh;
+  background: #111;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 20px;
+  overflow-y: auto;
+  color: white;
+  animation: slideUp 0.25s ease-out;
+}
+
+.header {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.comment {
+  background: #1b1b1b;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+
+.inputRow {
+  display: flex;
+  gap: 10px;
+}
+
+.inputRow input {
+  flex: 1;
+  padding: 10px;
+  background: #222;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+.inputRow button {
+  padding: 10px 14px;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.inputRow button:hover {
+  background: #45a049;
+}

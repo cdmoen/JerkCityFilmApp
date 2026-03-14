@@ -1,0 +1,45 @@
+.card {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  color: white;
+}
+
+.left {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 4px;
+  background: #333;
+}
+
+.username {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-align: center;
+  word-break: break-word;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.comment {
+  background: #1b1b1b;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.4;
+  width: 100%;
+  word-break: break-word;
+}

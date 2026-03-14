@@ -1,0 +1,57 @@
+.groupPage {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgb(0, 0, 0);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.groupHeader h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.addFilmBtn {
+  padding: 10px 14px;
+  background: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.addFilmBtn:hover {
+  background: #45a049;
+}
+
+.filmList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 12px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.backButton:hover {
+  opacity: 1;
+}

@@ -1,0 +1,3 @@
+// friendRequestsIncoming/
+//     $uid/
+//         $fromUid: true

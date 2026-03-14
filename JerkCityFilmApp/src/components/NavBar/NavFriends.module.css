@@ -1,0 +1,125 @@
+  .badge {
+    position: absolute;
+    top: 15px;
+    right: 1px;
+    width: 8px;
+    height: 8px;
+    background: red;
+    border-radius: 50%;
+  }
+
+@media screen and (max-width: 320px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .friendIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: none;
+  }
+
+  .friendIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: relative;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: inline;
+  }
+
+  .friendIcon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .friendsButton {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: relative;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .friendsButton:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #000;
+  }
+
+  .linkText {
+    display: inline;
+  }
+
+  .friendIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pending {
+    color: #4a90e2;
+    font-weight: 600;
+  }
+
+  .active {
+    background: #1d4ed8;
+    color: #fff;
+  }
+}

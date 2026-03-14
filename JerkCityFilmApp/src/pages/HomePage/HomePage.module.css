@@ -1,0 +1,117 @@
+.container {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem auto;
+  padding: 2.5rem 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px var(--color-border);;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.avatarContainer {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease;
+}
+
+.avatarSection:hover .avatarContainer {
+  opacity: 0.85;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.editBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.changeLabel {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.infoGrid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.infoCard {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.infoValue {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 0.65rem;
+  background: var(--color-terra);
+  color: var(--color-terra-soft-bg);
+  border: 1px solid var(--color-terra);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background: #ffe0e0;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 4rem;
+  color: #888;
+}

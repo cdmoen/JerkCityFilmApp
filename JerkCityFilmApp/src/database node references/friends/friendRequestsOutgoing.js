@@ -1,0 +1,7 @@
+/* 
+
+friendRequestsOutgoing/
+     $uid/
+        $toUid: true
+        
+*/
