@@ -1,0 +1,185 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.2s ease both;
+}
+
+.sheet {
+  width: 100%;
+  height: 75vh;
+  max-height: 75vh;
+  background: var(--color-surface);
+  border-radius: 16px 16px 0 0;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.sheetAnimateIn {
+  animation: slideUp 0.25s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.dragHandle {
+  width: 36px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.dragHandle::after {
+  content: "";
+  width: 36px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  display: block;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.sheet h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.searchBar {
+  display: flex;
+  gap: 8px;
+}
+
+.searchBar input {
+  flex: 1;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchBar input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchBar input:focus {
+  border-color: var(--color-amber);
+}
+
+.searchBar button {
+  background: var(--color-amber);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.searchBar button:hover {
+  background: var(--color-amber-hover);
+}
+
+.loading {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+.results {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+}
+
+.results::-webkit-scrollbar {
+  width: 4px;
+}
+
+.results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.results::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+/* Centered modal for desktop instead of a bottom-up sheet */
+
+@media (min-width: 768px) {
+  .dragHandle {
+    display: none;
+  }
+
+  .dragHandle::after {
+    display: none;
+  }
+
+  .backdrop {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sheet {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 12px;
+    animation: scaleIn 0.2s cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

@@ -11,35 +11,38 @@
 .sheet {
   width: 100%;
   max-height: 70vh;
-  background: #fff;
+  background: var(--color-card-bg);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   padding: 1rem;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  border-top: 1px solid var(--color-border);
   animation: slideUp 0.25s ease-out;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 @keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
 .header {
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(180deg, #D97721, #9E4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .dragHandle {
   width: 40px;
   height: 5px;
-  background: #ccc;
+  background: var(--color-border);
   border-radius: 3px;
-  margin: 0 auto 0.5rem auto;
+  margin: 0 auto 0.75rem auto;
 }
 
 .list {
@@ -53,28 +56,80 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  background: #fafafa;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+}
+
+.friendRow:last-child {
+  border-bottom: none;
 }
 
 .friendName {
   font-size: 1rem;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .inviteButton {
-  background: #4a90e2;
-  color: white;
+  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  color: #ffffff;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.inviteButton:hover {
+  opacity: 0.85;
 }
 
 .empty {
   text-align: center;
-  color: #777;
+  color: var(--color-text-muted);
+  font-style: italic;
   padding: 1rem 0;
+}
+
+
+/* ── max 320px ── */
+@media screen and (max-width: 320px) {
+  .sheet {
+    padding: 0.75rem;
+  }
+
+  .friendRow {
+    flex-direction: row; /* ← changed from column to row */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .inviteButton {
+    width: auto;        /* ← changed from 100% */
+    white-space: nowrap;
+  }
+}
+
+/* ── 321px – 767px ── */
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .sheet {
+    padding: 1rem;
+  }
+
+  .friendRow {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ── 768px and up ── */
+@media screen and (min-width: 768px) {
+  .sheet {
+    max-width: 500px;
+    border-radius: 16px;
+    align-self: center;
+    border: 1px solid var(--color-border);
+  }
 }

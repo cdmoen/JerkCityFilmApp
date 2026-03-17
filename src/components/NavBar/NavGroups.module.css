@@ -1,125 +1,65 @@
-  .badge {
-    position: absolute;
-    top: 15px;
-    right: 1px;
-    width: 8px;
-    height: 8px;
-    background: red;
-    border-radius: 50%;
-  }
+/* ── Shared styles ── */
 
+.groupsButton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.groupsButton:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.linkText {
+  display: none;
+}
+
+.groupsIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 1px;
+  width: 8px;
+  height: 8px;
+  background: red;
+  border-radius: 50%;
+}
+
+.pending {
+  font-weight: 600;
+}
+
+.active {
+  background: var(--color-surface);
+}
+
+
+/* ── max 320px ── */
 @media screen and (max-width: 320px) {
-  .groupsButton {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .groupsButton:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #000;
-  }
-
-  .linkText {
-    display: none;
-  }
-
-  .groupsIcon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+  .groupsIcon { width: 1.5rem; height: 1.5rem; }
 }
 
+/* ── 321px – 767px ── */
 @media screen and (min-width: 321px) and (max-width: 767px) {
-  .groupsButton {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .groupsButton:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #000;
-  }
-
-  .linkText {
-    display: none;
-  }
-
-  .groupsIcon {
-    width: 2rem;
-    height: 2rem;
-  }
+  .groupsIcon { width: 2rem; height: 2rem; }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .groupsButton {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    position: relative;
-    text-decoration: none;
-    color: #333;
-    font-size: 1.05rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: color 0.2s ease, background 0.2s ease;
-  }
-
-  .groupsButton:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #000;
-  }
-
-  .linkText {
-    display: inline;
-  }
-
-  .groupsIcon {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .groupsButton {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    position: relative;
-    text-decoration: none;
-    color: #333;
-    font-size: 1.05rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: color 0.2s ease, background 0.2s ease;
-  }
-
-  .groupsButton:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: #000;
-  }
-
-  .linkText {
-    display: inline;
-  }
-
-  .groupsIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .pending {
-    color: #4a90e2;
-    font-weight: 600;
-  }
-
-  .active {
-    background: #1d4ed8;
-    color: #fff;
-  }
+/* ── 768px and up ── */
+@media screen and (min-width: 768px) {
+  .linkText { display: inline; }
+  .groupsIcon { width: 40px; height: 40px; }
 }

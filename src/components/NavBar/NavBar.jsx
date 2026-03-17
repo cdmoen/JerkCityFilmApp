@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext.jsx";
-import NavFriends from "./NavFriends.jsx";
-import NavGroups from "./NavGroups.jsx";
+import { useAuth } from "../../contexts/AuthContext";
+import NavFriends from "./NavFriends";
+import NavGroups from "./NavGroups";
 import styles from "./NavBar.module.css";
 import { useTheme } from "../../contexts/ThemeContext.jsx";
 

@@ -36,7 +36,7 @@ export default function NavFriends() {
     }
     >
       <img
-        src="/images/light.png"
+        src="/images/ticket.png"
         alt="Friend Icon"
         title="Friends"
         className={styles.friendIcon}

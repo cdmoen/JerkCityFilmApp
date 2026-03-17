@@ -2,7 +2,7 @@ import styles from "./IncomingInvitesList.module.css";
 
 export default function IncomingInvitesList({
   incomingInvites,
-  incomingGroupMap,
+  incomingInviteGroups,
   friends,
   uid,
   acceptGroupInvite,
@@ -15,7 +15,7 @@ export default function IncomingInvitesList({
     <ul className={styles.list}>
       {Object.entries(incomingInvites).map(([inviteId, invite]) => {
         const groupId = invite.groupId;
-        const group = incomingGroupMap[groupId];
+        const group = incomingInviteGroups[groupId];
         const groupName = group?.name || groupId;
 
         const inviter =

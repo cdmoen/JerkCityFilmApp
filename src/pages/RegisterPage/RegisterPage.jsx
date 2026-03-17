@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { finalizeUserProfile } from "../../modules/users/finalizeUserProfile";
 import { reserveUsername } from "../../modules/users/reserveUsername";
 import styles from "./RegisterPage.module.css";
+import { NavLink } from "react-router-dom";
 
 export default function RegisterPage() {
   const { user } = useAuth();
@@ -43,7 +44,7 @@ export default function RegisterPage() {
     <main className={styles.container}>
       <header className={styles.header}>
         <img
-          src="public\images\flickd-2.png"
+          src="/images/logo-flickd-play.png"
           alt="Flickd Logo"
           className={styles.logo}
         />
@@ -78,9 +79,13 @@ export default function RegisterPage() {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-        <button className={styles.button} type="submit">
-          Create Account
-        </button>
+          <button className={styles.button} type="submit">
+            Create account
+          </button>
+
+          <NavLink to="/login" className={styles.loginbutton}>
+            Login
+          </NavLink>
       </form>
     </main>
   );

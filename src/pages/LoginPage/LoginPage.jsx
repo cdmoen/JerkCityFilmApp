@@ -35,7 +35,7 @@ export default function LoginPage() {
     <main className={styles.container}>
       <header className={styles.header}>
         <img
-          src="public\images\flickd-2.png"
+          src="/images/logo-flickd-play.png"
           alt="Flickd Logo"
           className={styles.logo}
         />
@@ -68,7 +68,7 @@ export default function LoginPage() {
       </form>
 
       <Link className={styles.link} to="/register">
-        Create an Account
+        Create account
       </Link>
     </main>
   );

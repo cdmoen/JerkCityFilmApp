@@ -3,22 +3,35 @@
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
+  box-sizing: border-box; /* ← fixes overflow */
 }
 
 .searchInput {
   width: 100%;
   padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   font-size: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  box-sizing: border-box; /* ← fixes overflow */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--color-amber);
+  box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
+  outline: none;
 }
 
 .results {
   display: flex;
   flex-direction: column;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box; /* ← fixes overflow */
 }
 
 .resultRow {
@@ -27,19 +40,90 @@
   justify-content: space-between;
   padding: 0.6rem 0.8rem;
   cursor: pointer;
+  background: var(--color-card-bg);
+  border-bottom: 1px solid var(--color-border);
   transition: background 0.15s ease;
 }
 
+.resultRow:last-child {
+  border-bottom: none;
+}
+
 .resultRow:hover {
-  background: #f5f5f5;
+  background: var(--color-surface);
 }
 
 .username {
   font-size: 0.95rem;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .status {
   font-size: 0.8rem;
-  color: #777;
+  color: var(--color-text-muted);
+}
+
+.addButton {
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.addButton:hover {
+  background: linear-gradient(180deg, var(--color-accept-hover), var(--color-accept));
+}
+
+/* ── max 320px ── */
+@media screen and (max-width: 320px) {
+  .searchInput {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .addButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── 321px – 767px ── */
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .searchInput {
+    font-size: 0.95rem;
+  }
+
+  .resultRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .addButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── 768px and up ── */
+@media screen and (min-width: 768px) {
+  .resultRow {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .addButton {
+    width: auto;
+  }
 }

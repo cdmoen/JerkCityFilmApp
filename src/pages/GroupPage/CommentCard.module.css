@@ -1,45 +1,73 @@
 .card {
   display: flex;
-  gap: 12px;
-  padding: 10px 0;
-  color: white;
+  gap: 10px;
+  background: #1a2535;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 10px 12px;
+  animation: fadeUp 0.25s ease both;
 }
 
-.left {
-  width: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Avatar ── */
+
+.avatarWrap {
   flex-shrink: 0;
 }
 
-.avatar {
-  width: 48px;
-  height: 48px;
+.avatarImg {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 4px;
-  background: #333;
+  display: block;
+}
+
+.avatarInitial {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e07b2a, #c9521a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Body ── */
+
+.body {
+  flex: 1;
+  min-width: 0;
 }
 
 .username {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  text-align: center;
-  word-break: break-word;
+  font-size: 11px;
+  font-weight: 600;
+  color: #e07b2a;
+  letter-spacing: 0.04em;
+  margin: 0 0 3px;
+  text-transform: uppercase;
 }
 
-.right {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.comment {
-  background: #1b1b1b;
-  padding: 12px;
-  border-radius: 10px;
-  line-height: 1.4;
-  width: 100%;
+.text {
+  font-size: 13px;
+  color: #e8e4dc;
+  line-height: 1.5;
+  font-weight: 300;
+  margin: 0;
   word-break: break-word;
 }

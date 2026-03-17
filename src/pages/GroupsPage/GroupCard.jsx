@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
 import styles from "./GroupCard.module.css";
 
 export default function GroupCard({ group, onDelete, onInvite }) {
   const navigate = useNavigate();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <main className={styles.card}>
@@ -13,6 +14,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
           onClick={() => navigate(`/groups/${group.id}`)}
         >
           {group.name}
+          {" →"}
         </button>
 
         <div className={styles.actions}>
@@ -25,7 +27,7 @@ export default function GroupCard({ group, onDelete, onInvite }) {
 
           <button
             className={styles.deleteButton}
-            onClick={() => onDelete(group)}
+            onClick={() => setShowConfirm(true)}
           >
             Delete Group
           </button>
@@ -35,6 +37,36 @@ export default function GroupCard({ group, onDelete, onInvite }) {
       <div className={styles.meta}>
         <span>Created: {new Date(group.createdAt).toLocaleString()}</span>
       </div>
+
+      {showConfirm && (
+        <div className={styles.backdrop}>
+          <div className={styles.modal}>
+            <p className={styles.modalText}>
+              Are you sure you want to delete <strong>{group.name}</strong>?
+              This cannot be undone.
+            </p>
+            <div className={styles.modalButtons}>
+              <button
+                className={styles.cancelButton}
+                onClick={() => setShowConfirm(false)}
+              >
+                Cancel
+              </button>
+
+              {/* warning for deleting a group */}
+              <button
+                className={styles.confirmButton}
+                onClick={() => {
+                  onDelete(group);
+                  setShowConfirm(false);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

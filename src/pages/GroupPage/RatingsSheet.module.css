@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(5, 10, 18, 0.85);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -10,41 +10,210 @@
 
 .sheet {
   width: 100%;
+  max-width: 600px;
   max-height: 70vh;
-  background: #111;
+  background: #0f1923;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  padding: 20px;
+  padding: 12px 20px 28px;
   overflow-y: auto;
-  color: white;
+  color: #e8e4dc;
+  font-family: "Open Sans", sans-serif;
   animation: slideUp 0.25s ease-out;
 }
 
-.header {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 16px;
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
+/* ── Handle ── */
+
+.handle {
+  width: 36px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+/* ── Header ── */
+
+.header {
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e07b2a;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+/* ── Average score badge ── */
+
+.average {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  background: #1a2535;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.avgNumber {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #e07b2a;
+  line-height: 1;
+}
+
+.avgStar {
+  font-size: 14px;
+  color: #e07b2a;
+}
+
+.avgLabel {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+/* ── List ── */
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
 .row {
   display: flex;
-  justify-content: space-between;
-  background: #1b1b1b;
-  padding: 12px;
-  border-radius: 10px;
+  align-items: center;
+  gap: 12px;
+  background: #1a2535;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+/* ── Avatar ── */
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: linear-gradient(135deg, #e07b2a, #c9521a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
 }
 
 .user {
+  flex: 1;
+  font-size: 13px;
   font-weight: 500;
+  color: #e8e4dc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.stars {
-  font-size: 1.1rem;
-  color: #f5c518; /* IMDb gold */
+/* ── Star display ── */
+
+.starsRow {
+  display: flex;
+  gap: 2px;
+}
+
+.starFilled {
+  font-size: 13px;
+  color: #e07b2a;
+}
+
+.starEmpty {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.ratingNumber {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #e07b2a;
+  min-width: 16px;
+  text-align: right;
+}
+
+/* ── Empty state ── */
+
+.empty {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+  font-style: italic;
+  margin: 0 0 20px;
+}
+
+/* ── Close button ── */
+
+.closeBtn {
+  width: 100%;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.closeBtn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #e8e4dc;
 }

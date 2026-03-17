@@ -1,10 +1,14 @@
 body {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background: var(--color-page-bg);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
 }
 
 :root {
   /* backgrounds */
-  --color-page-bg: #ffffff;
+  --color-page-bg: #dde1e9;
   --color-card-bg: #f7f7f7;
   --color-surface: #efefef;
   --color-border: rgba(0, 0, 0, 0.08);
@@ -24,6 +28,18 @@ body {
   --color-terra-hover: #7A3229;
   --color-terra-soft-bg: #F9ECEB;
   --color-terra-soft-text: #7A3229;
+
+  /* accept colors */
+  --color-accept: #5CB85C;
+  --color-accept-hover: #285e28;
+  --color-accept-soft-bg: #EDF7ED;
+  --color-accept-soft-text: #3D8B3D;
+
+  /* sky blue (for the group links) */  
+  --color-blue: #2E8FD4;
+  --color-blue-hover: #1A7FBF;
+  --color-blue-soft-bg: #E0F2FC;
+  --color-blue-soft-text: #1A7FBF;
 }
 
 [data-theme="dark"] {
@@ -41,4 +57,12 @@ body {
   --color-terra-hover: #9E4738;
   --color-terra-soft-bg: #2A1510;
   --color-terra-soft-text: #C4614F;
+  --color-accept: #6DCF6D;
+  --color-accept-hover: #285e28;
+  --color-accept-soft-bg: #1A2E1A;
+  --color-accept-soft-text: #6DCF6D;
+  --color-blue: #3AAEE0;
+  --color-blue-hover: #2E8FD4;
+  --color-blue-soft-bg: #0F2A3D;
+  --color-blue-soft-text: #3AAEE0;
 }

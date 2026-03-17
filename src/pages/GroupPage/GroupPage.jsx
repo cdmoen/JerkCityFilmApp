@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../modules/firebase";
 import { useAuth } from "../../contexts/AuthContext";
-import AddFilmSheet from "./AddFilmSheet";
+import { addFilmToGroup } from "../../modules/groups/addFilmToGroup";
+import AddFilmSheet from "../../components/AddFilmSheet/AddFilmSheet";
 import FilmCard from "./FilmCard";
 import styles from "./GroupPage.module.css";
 
@@ -43,7 +44,7 @@ export default function GroupPage() {
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path
               d="M15 18l-6-6 6-6"
-              stroke="red"
+              stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -72,10 +73,9 @@ export default function GroupPage() {
       </div>
 
       <AddFilmSheet
-        groupId={groupId}
-        uid={uid}
         onClose={() => setAddFilmSheetIsOpen(false)}
         isOpen={addFilmSheetIsOpen}
+        onAdd={(movie) => addFilmToGroup(groupId, uid, movie.id)}
       />
     </div>
   );

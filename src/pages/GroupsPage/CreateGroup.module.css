@@ -1,27 +1,10 @@
-@media screen and (max-width: 320px) {
-  .form {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .button {
-    width: 100%;
+  to {
+    opacity: 1;
   }
-  
-}
-
-@media screen and (min-width: 321px) and (max-width: 767px) {
-  .form {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-  
-  .button {
-    width: 100%;
-  }
-
 }
 
 .form {
@@ -29,44 +12,102 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .form {
+    animation: fadeIn 0.4s ease both;
+  }
 }
 
 .input {
   flex: 1;
+  min-width: 0;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   font-size: 0.95rem;
-  transition: border-color 0.2s ease;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: var(--color-amber);
+  box-shadow: 0 0 0 3px var(--color-amber-soft-bg);
 }
 
 .button {
   padding: 0.5rem 1rem;
-  background-color: #4a90e2;
-  color: white;
+  background: linear-gradient(
+    180deg,
+    var(--color-accept),
+    var(--color-accept-hover)
+  );
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.button:disabled {
-  background-color: #9bbfe9;
-  cursor: not-allowed;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
 }
 
 .button:hover:not(:disabled) {
-  background-color: #3a78c2;
+  opacity: 0.85;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .error {
-  color: #d33;
+  color: var(--color-terra);
   font-size: 0.85rem;
   margin-left: 0.5rem;
+}
+
+/* ── max 320px ── */
+@media screen and (max-width: 320px) {
+  .form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ── 321px – 767px ── */
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .form {
+    flex-direction: row; /* ← change from column to row */
+    align-items: center;
+  }
+
+  .button {
+    width: auto; /* ← change from 100% to auto */
+  }
+}
+
+/* ── 768px and up ── */
+@media screen and (min-width: 768px) {
+  .form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .button {
+    width: auto;
+  }
 }

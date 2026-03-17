@@ -11,6 +11,7 @@ import { database } from "../../modules/firebase";
 import styles from "./SearchUsers.module.css";
 
 export default function SearchUsers({
+  uid,
   friends,
   incoming,
   outgoing,
@@ -44,7 +45,10 @@ export default function SearchUsers({
         uid,
         username: user.username,
       }));
-      setResults(formatted);
+
+      const filtered = formatted.filter((user) => user.uid !== uid);
+
+      setResults(filtered);
     } else {
       setResults([]);
     }

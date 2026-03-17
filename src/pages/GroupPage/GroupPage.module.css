@@ -1,38 +1,105 @@
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .groupHeader {
+    animation: fadeUp 0.3s ease 0.05s both;
+  }
+
+  .filmList {
+    animation: fadeUp 0.3s ease 0.12s both;
+  }
+}
+
 .groupPage {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 16px;
   max-width: 700px;
   margin: 0 auto;
-  color: rgb(0, 0, 0);
+  color: #e8e4dc;
+  font-family: "Open Sans", sans-serif;
 }
+
+/* ── Header ── */
 
 .groupHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .groupHeader h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 600;
   margin: 0;
+  background: linear-gradient(180deg, #d97721, #9e4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.addFilmBtn {
-  padding: 10px 14px;
-  background: #4caf50;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-size: 0.95rem;
+/* ── Back button ── */
+
+.backButton {
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: 4px;
+  padding: 6px 8px;
   cursor: pointer;
-  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.backButton:hover {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+}
+
+/* ── Add film button ── */
+
+.addFilmBtn {
+  background: linear-gradient(135deg, #e07b2a, #c9521a);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: filter 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .addFilmBtn:hover {
-  background: #45a049;
+  filter: brightness(1.12);
 }
+
+/* ── Film list ── */
 
 .filmList {
   display: flex;
@@ -40,18 +107,43 @@
   gap: 12px;
 }
 
-.backButton {
-  background: none;
-  border: none;
-  color: rgb(0, 0, 0);
-  font-size: 1.4rem;
-  cursor: pointer;
-  padding: 0;
-  margin-right: 12px;
-  opacity: 0.8;
-  transition: opacity 0.15s ease;
+/* ── Responsive ── */
+
+@media screen and (max-width: 320px) {
+  .groupPage {
+    padding: 14px 12px;
+  }
+
+  .groupHeader {
+    flex-wrap: wrap;
+  }
+
+  .groupHeader h1 {
+    font-size: 22px;
+    order: 1;
+    width: 100%;
+  }
+
+  .backButton {
+    order: 0;
+  }
+
+  .addFilmBtn {
+    order: 2;
+  }
 }
 
-.backButton:hover {
-  opacity: 1;
+@media screen and (min-width: 768px) {
+  .groupPage {
+    padding: 40px;
+  }
+
+  .groupHeader h1 {
+    font-size: 36px;
+  }
+
+  .addFilmBtn {
+    font-size: 12px;
+    padding: 11px 20px;
+  }
 }

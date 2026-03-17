@@ -4,22 +4,28 @@
   max-width: 420px;
   margin: 4rem auto;
   padding: 2.5rem;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+
   font-family: system-ui, sans-serif;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .title {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #222;
+  background: linear-gradient(180deg, #D97721, #9E4738);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;}  
+
+.logo {
+  width: 100%;
+  object-fit: contain;
 }
 
 .error {
-  color: #e63946;
+  color: var(--color-amber);
   margin-bottom: 1rem;
   font-size: 0.95rem;
 }
@@ -33,35 +39,59 @@
 
 .input {
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 1rem;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input:focus {
-  border-color: #1d4ed8;
-  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+  border-color: var(--color-terra);
+  box-shadow: 0 0 0 3px var(--color-terra-soft-bg);
   outline: none;
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #1d4ed8;
-  color: #fff;
+  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.2s ease;
 }
 
 .button:hover {
-  background: #1742b0;
+  background: linear-gradient(180deg, var(--color-terra-hover), var(--color-amber-hover));
 }
 
 .button:active {
-  background: #12368f;
+  background: var(--color-amber-hover);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.buttonRow > * {
+  flex: 1;
+}
+
+.loginbutton {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-amber);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.loginbutton:hover {
+  color: var(--color-amber-hover);
 }

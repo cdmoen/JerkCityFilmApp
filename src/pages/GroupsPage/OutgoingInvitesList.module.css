@@ -1,35 +1,59 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .listItem {
-  background: #1e1e1e;
-  padding: 14px 16px;
-  border-radius: 8px;
-  border: 1px solid #333;
+  padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+}
+
+.listItem:last-child {
+  border-bottom: none;
 }
 
 .groupName {
-  font-weight: 600;
-  color: #fff;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .rejectButton {
-  background: #d9534f;
-  color: white;
-  padding: 6px 12px;
+  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  color: #ffffff;
+  border: 1px solid var(--color-terra);
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
-  border: none;
   cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+.rejectButton:hover {
+  opacity: 0.85;
 }
 
 .empty {
-  color: #888;
+  color: var(--color-text-muted);
   font-style: italic;
+  padding: 0.5rem 0;
+}
+
+/* ── max 320px ── */
+@media screen and (max-width: 320px) {
+  .listItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .rejectButton {
+    width: auto;
+    white-space: nowrap;
+  }
 }

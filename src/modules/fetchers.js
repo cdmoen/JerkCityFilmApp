@@ -3,7 +3,7 @@
 How API Requests Work in This Project
 All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
 These files run on the server, not in the browser, which keeps the TMDB API key private.
-When one of the fetcher functions below calls something like:
+When one of the fetcher functions below call something like:
 
 /api/tmdb?path=movie/550&language=en-US
 
@@ -27,7 +27,6 @@ This lets the frontend fetch TMDB data securely without ever exposing the API ke
     FETCH MOVIE SEARCH
 ==============================
 
-DESCRIPTION: 
 This fetcher takes in a movie string param and returns a list of TMDB movies with the following info for each:
 
  "results": [
@@ -42,7 +41,7 @@ This fetcher takes in a movie string param and returns a list of TMDB movies wit
       "id": 550,
       "original_language": "en",
       "original_title": "Fight Club",
-      "overview": "Brief movie desription...",
+      "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
       "popularity": 73.433,
       "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
       "release_date": "1999-10-15",
@@ -54,7 +53,7 @@ This fetcher takes in a movie string param and returns a list of TMDB movies wit
  */
 
 export async function fetchMovieSearch(searchParams) {
-  // Insert the searchParams into the fetch URL
+  // Build the URL for your Vercel API route
   const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
     searchParams,
   )}&include_adult=false&language=en-US&page=1`;
@@ -71,11 +70,10 @@ export async function fetchMovieSearch(searchParams) {
 
 /*
 ==============================
-    FETCH MOVIE INFO
+    FETCH MOVIE DETAILS
 ==============================
 
-DESCRIPTION:
-This fetcher takes in a single TMDB movieID and returns detailed info about the movie:
+This fetcher takes in a single TMDB movieID and returns the following information about the movie:
 
 {
   "adult": false,
@@ -171,9 +169,9 @@ This fetcher takes in a single TMDB movieID and returns detailed info about the 
 }
 */
 
-export async function fetchMovieInfo(movieID) {
+export async function fetchMovieDetails(movieID) {
   const response = await fetch(
-    `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos&language=en-US`,
+    `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos,images&language=en-US`,
   );
 
   if (!response.ok) {

@@ -12,9 +12,9 @@ export async function deleteFriend(myUid, otherUid) {
   updates[`friends/${myUid}/${otherUid}`] = null;
   updates[`friends/${otherUid}/${myUid}`] = null;
 
-  // --- Incoming invites ---
+  // --- Incoming Group Invites ---
 
-  // Check myUid's incoming invites for any sent by otherUid
+  // Check myUid's incoming group invites for any sent by otherUid
   const myIncomingSnap = await get(
     ref(database, `groupInvitesIncoming/${myUid}`),
   );
@@ -25,7 +25,7 @@ export async function deleteFriend(myUid, otherUid) {
     }
   }
 
-  // Check otherUid's incoming invites for any sent by myUid
+  // Check otherUid's incoming group invites for any sent by myUid
   const otherIncomingSnap = await get(
     ref(database, `groupInvitesIncoming/${otherUid}`),
   );
@@ -36,9 +36,9 @@ export async function deleteFriend(myUid, otherUid) {
     }
   }
 
-  // --- Outgoing invites ---
+  // --- Outgoing Group invites ---
 
-  // Check myUid's outgoing invites for any sent to otherUid
+  // Check myUid's pending outoging group invites for any sent to otherUid
   const myOutgoingSnap = await get(
     ref(database, `groupInvitesOutgoing/${myUid}`),
   );
@@ -49,7 +49,7 @@ export async function deleteFriend(myUid, otherUid) {
     }
   }
 
-  // Check otherUid's outgoing invites for any sent to myUid
+  // Check otherUid's pending outgoing group invites for any sent to myUid
   const otherOutgoingSnap = await get(
     ref(database, `groupInvitesOutgoing/${otherUid}`),
   );

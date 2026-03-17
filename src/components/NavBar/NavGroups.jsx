@@ -32,15 +32,13 @@ export default function NavGroups() {
          ${isActive ? styles.active : ""}`
       }
     >
-      <img 
-        src="/images/ticket.png"
+      <img
+        src="/images/roll.png"
         alt="Groups Icon"
         title="Groups"
         className={styles.groupsIcon}
       />
-      <span className={styles.linkText}>
-        Groups
-      </span>
+      <span className={styles.linkText}>Groups</span>
       {hasInvites && <span className={styles.badge}></span>}
     </NavLink>
   );

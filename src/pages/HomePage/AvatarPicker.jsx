@@ -3,12 +3,12 @@ import { database } from "../../modules/firebase";
 import styles from "./AvatarPicker.module.css";
 
 const avatarList = [
-  "/avatars/camcorder.png",
-  "/avatars/camera.png",
-  "/avatars/directorChair.png",
-  "/avatars/filmRoll.png",
-  "/avatars/masks.png",
   "/avatars/popcorn.png",
+  "/avatars/chair.png",
+  "/avatars/faces.png",
+  "/avatars/roll.png",
+  "/avatars/star.png",
+  "/avatars/ticket.png",
 ];
 
 export default function AvatarPicker({ uid, onClose }) {

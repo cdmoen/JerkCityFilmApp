@@ -30,12 +30,12 @@ https://developer.themoviedb.org/reference/configuration-details
 */
 
 // Takes in movieInfo object and returns top 3 most famous cast members
-export function topThreeStars(movieInfo) {
-  const cast = movieInfo.credits.cast;
+export function topThreeStars(movie) {
+  const cast = movie.credits.cast;
   const topTenCast = cast.slice(0, 10);
 
   const topThreeStars = [...topTenCast]
-    .sort((a, b) => a.popularity - b.popularity)
+    .sort((a, b) => b.popularity - a.popularity)
     .slice(0, 3);
   const names = topThreeStars.map((e) => e.name).join(", ");
 
@@ -43,8 +43,11 @@ export function topThreeStars(movieInfo) {
 }
 
 // Takes in movieInfo object and returns director
-export function director(movieInfo) {
-  const crew = movieInfo.credits.crew;
+export function director(movie) {
+  const crew = movie.credits.crew;
+  const directors = crew.map((member) =>
+    member.job === "Director" ? member.name : null,
+  );
   const director = crew.find((member) => member.job === "Director");
   if (!director) {
     return null;
@@ -52,14 +55,31 @@ export function director(movieInfo) {
   return director.name;
 }
 
-// Takes in movieInfo object and returns youtube embed code
-export function youtubeTrailer(movieInfo) {
-  const firstYoutubeLink = movieInfo.videos.results.find(
-    (trailer) => trailer.site === "YouTube",
+// Takes in movieInfo object and returns youtube embed code for best quality
+// official trailer, (or unofficial trailer of no official trailers available)
+export function youtubeTrailer(movie) {
+  // movieInfo is a movie object. Inside it is an array of video objects.
+  // movieInfo.videos.results is an array of video objects with properties like 'key', 'size', 'site', 'type', 'official'
+
+  // Filter the results array for 'trailer' videos. If no trailers found, return null.
+  const trailers = movie.videos.results.filter((v) => v.type === "Trailer");
+  if (trailers.length === 0) return "dQw4w9WgXcQ";
+
+  // Filter for 'official' trailers. If no official trailers, keep looking for the best trailer.
+  const officialTrailers = trailers.filter((v) => v.official === true);
+  const pool = officialTrailers.length > 0 ? officialTrailers : trailers;
+
+  // Filter for YouTube trailers only, for ease of use. If no youtube trailers, give up and return null.
+  const youtubeResults = pool.filter((v) => v.site === "YouTube");
+  if (youtubeResults.length === 0) return "dQw4w9WgXcQ";
+
+  // Sort a copy of the remaining YouTube trailers by size (bigger = better video quality)
+  const youtubeResultsSorted = [...youtubeResults].sort(
+    (a, b) => b.size - a.size,
   );
-  if (!firstYoutubeLink) {
-    return null;
-  }
-  const youtubeCode = firstYoutubeLink.key;
+
+  // Return the highest quality video
+  const youtubeCode = youtubeResultsSorted[0].key;
+
   return youtubeCode;
 }

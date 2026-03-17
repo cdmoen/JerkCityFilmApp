@@ -1,54 +1,84 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .listItem {
-  background: #1e1e1e;
-  padding: 14px 16px;
-  border-radius: 8px;
-  border: 1px solid #333;
+  padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+}
+
+.listItem:last-child {
+  border-bottom: none;
 }
 
 .groupName {
-  font-weight: 600;
-  color: #fff;
-}
-
-.inviter {
-  color: #bbb;
-  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .buttonRow {
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
 }
 
 .acceptButton {
-  background: #3cb371;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
+  background: linear-gradient(180deg, var(--color-accept), var(--color-accept-hover));
+  color: #ffffff;
   border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+.acceptButton:hover {
+  opacity: 0.85;
 }
 
 .rejectButton {
-  background: #d9534f;
-  color: white;
-  padding: 6px 12px;
+  background: linear-gradient(180deg, var(--color-amber-hover), var(--color-terra-hover));
+  color: #ffffff;
+  border: 1px solid var(--color-terra);
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
-  border: none;
   cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s ease;
+}
+
+.rejectButton:hover {
+  opacity: 0.85;
 }
 
 .empty {
-  color: #888;
+  color: var(--color-text-muted);
   font-style: italic;
+  padding: 0.5rem 0;
+}
+
+/* ── max 320px ── */
+@media screen and (max-width: 320px) {
+  .buttonRow {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .acceptButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .rejectButton {
+    width: auto;
+    white-space: nowrap;
+  }
 }

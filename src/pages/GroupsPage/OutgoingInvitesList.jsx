@@ -19,7 +19,7 @@ export default function OutgoingInvitesList({
         return Object.keys(invitedUsers).map((friendUid) => (
           <li key={`${groupId}-${friendUid}`} className={styles.listItem}>
             <span className={styles.groupName}>
-              {groupName} → {friends.find((i) => i.uid === friendUid)?.username}
+              {groupName} ➡️ {friends.find((i) => i.uid === friendUid)?.username}
             </span>
 
             <button
