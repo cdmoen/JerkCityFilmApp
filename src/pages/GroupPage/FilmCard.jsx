@@ -1,125 +1,133 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CommentsSheet from "./CommentsSheet";
-import RatingsSheet from "./RatingsSheet";
-import SeenSheet from "./SeenSheet";
-import {
-  markFilmAsViewed,
-  rateFilm,
-} from "../../modules/groups/filmInteractions";
-import { removeFilmFromGroup } from "../../modules/groups/removeFilmFromGroup";
-import { useFriends } from "../../hooks/useFriends";
 import styles from "./FilmCard.module.css";
 
-export default function FilmCard({ film, filmId, groupId, uid, profile }) {
-  const [commentsOpen, setCommentsOpen] = useState(false);
-  const [ratingsOpen, setRatingsOpen] = useState(false);
-  const [seenOpen, setSeenOpen] = useState(false);
-  const { friends } = useFriends(uid);
+export default function FilmCard({
+  film,
+  filmId,
+  groupId,
+  uid,
+  profile,
+  onOpenSheet,
+  onMarkViewed,
+  onRate,
+  onRemove,
+}) {
   const navigate = useNavigate();
 
-  // Quick actions
-  function handleViewed() {
-    markFilmAsViewed(groupId, filmId, uid, profile);
-    setSeenOpen(true); // optional: open sheet after marking
-  }
+  const hasViewed = film.seen?.[uid];
+  const userRating = film.ratings?.[uid]?.rating ?? null;
+  const seenCount = film.seen ? Object.keys(film.seen).length : 0;
+  const ratingCount = film.ratings ? Object.keys(film.ratings).length : 0;
+  const avgRating = ratingCount
+    ? (
+        Object.values(film.ratings).reduce((sum, v) => sum + v.rating, 0) /
+        ratingCount
+      ).toFixed(1)
+    : null;
 
-  function handleQuickRating(rating) {
-    rateFilm(groupId, filmId, uid, rating, profile);
-    setRatingsOpen(true); // optional: open sheet after rating
-  }
-
-  function handleMovieClick(filmId) {
-    navigate(`/movies/${filmId}`);
-  }
-
-  async function handleDelete() {
-    await removeFilmFromGroup(groupId, filmId);
-  }
-
-  console.log(film);
   return (
     <div className={styles.card}>
-      <img
-        src={film.poster}
-        className={styles.poster}
-        onClick={() => handleMovieClick(filmId)}
-      />
 
+      {/* ── Poster ── */}
+      <button
+        className={styles.posterBtn}
+        onClick={() => navigate(`/movies/${filmId}`)}
+      >
+        {film.poster ? (
+          <img src={film.poster} alt={film.title} className={styles.poster} />
+        ) : (
+          <div className={styles.posterFallback} />
+        )}
+      </button>
+
+      {/* ── Info ── */}
       <div className={styles.info}>
-        <h3 className={styles.title} onClick={() => handleMovieClick(filmId)}>
-          {film.title}
-        </h3>
 
-        <div className={styles.actions}>
+        <button
+          className={styles.titleBtn}
+          onClick={() => navigate(`/movies/${filmId}`)}
+        >
+          {film.title}
+        </button>
+
+        <p className={styles.meta}>
+          {film.releaseDate?.slice(0, 4)}
+          {film.director && (
+            <>
+              <span className={styles.dot}>·</span>
+              {film.director}
+            </>
+          )}
+        </p>
+
+        {/* Stats row */}
+        <div className={styles.stats}>
+          {avgRating && (
+            <span className={styles.stat}>★ {avgRating}</span>
+          )}
+          {seenCount > 0 && (
+            <span className={styles.stat}>
+              {seenCount} seen
+            </span>
+          )}
+        </div>
+
+        {/* Sheet triggers */}
+        <div className={styles.sheetBtns}>
           <button
-            className={styles.actionBtn}
-            onClick={() => setCommentsOpen(true)}
+            className={styles.sheetBtn}
+            onClick={() => onOpenSheet("comments")}
           >
             Comments
           </button>
           <button
-            className={styles.actionBtn}
-            onClick={() => setRatingsOpen(true)}
+            className={styles.sheetBtn}
+            onClick={() => onOpenSheet("ratings")}
           >
             Ratings
+            {ratingCount > 0 && (
+              <span className={styles.sheetBtnCount}>{ratingCount}</span>
+            )}
           </button>
           <button
-            className={styles.actionBtn}
-            onClick={() => setSeenOpen(true)}
+            className={styles.sheetBtn}
+            onClick={() => onOpenSheet("seen")}
           >
-            Viewed
+            Seen
+            {seenCount > 0 && (
+              <span className={styles.sheetBtnCount}>{seenCount}</span>
+            )}
           </button>
         </div>
 
+        {/* Quick actions */}
         <div className={styles.quickActions}>
-          <button className={styles.viewedBtn} onClick={handleViewed}>
-            I've Viewed This
+          <button
+            className={hasViewed ? styles.viewedActive : styles.viewedBtn}
+            onClick={onMarkViewed}
+            disabled={hasViewed}
+          >
+            {hasViewed ? "✓ Seen" : "Mark as seen"}
           </button>
 
           <div className={styles.ratingRow}>
             {[1, 2, 3, 4, 5].map((n) => (
               <button
                 key={n}
-                className={styles.ratingStar}
-                onClick={() => handleQuickRating(n)}
+                className={n <= userRating ? styles.starActive : styles.star}
+                onClick={() => onRate(n)}
               >
-                {n}★
+                ★
               </button>
             ))}
-            <button className={styles.removeBtn} onClick={handleDelete}>
-              Remove
-            </button>
           </div>
+
+          <button className={styles.removeBtn} onClick={onRemove}>
+            Remove
+          </button>
         </div>
+
       </div>
-      <CommentsSheet
-        isOpen={commentsOpen}
-        onClose={() => setCommentsOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        uid={uid}
-        profile={profile}
-        friends={friends}
-      />
-
-      <RatingsSheet
-        isOpen={ratingsOpen}
-        onClose={() => setRatingsOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        profile={profile}
-        friends={friends}
-      />
-
-      <SeenSheet
-        isOpen={seenOpen}
-        onClose={() => setSeenOpen(false)}
-        groupId={groupId}
-        filmId={filmId}
-        profile={profile}
-        friends={friends}
-      />
     </div>
   );
 }

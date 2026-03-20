@@ -3,7 +3,7 @@ import { createGroup } from "../../modules/groups/createGroup";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./CreateGroup.module.css";
 
-export default function CreateGroup() {
+export default function CreateGroup({ onCreated }) {
   const { user } = useAuth();
   const [groupName, setGroupName] = useState("");
   const [error, setError] = useState("");
@@ -11,14 +11,16 @@ export default function CreateGroup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!groupName.trim()) return;
     setError("");
     setLoading(true);
 
     try {
-      await createGroup(user.uid, groupName);
+      await createGroup(user.uid, groupName.trim());
       setGroupName("");
+      if (onCreated) onCreated();
     } catch {
-      setError("Could not create group.");
+      setError("Could not create group. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -32,14 +34,13 @@ export default function CreateGroup() {
         placeholder="Group name"
         value={groupName}
         onChange={(e) => setGroupName(e.target.value)}
+        maxLength={48}
         required
       />
-
-      <button className={styles.button} type="submit" disabled={loading}>
+      <button className={styles.submitBtn} type="submit" disabled={loading}>
         {loading ? "Creating..." : "Create"}
       </button>
-
-      {error && <span className={styles.error}>{error}</span>}
+      {error && <p className={styles.error}>{error}</p>}
     </form>
   );
 }

@@ -1,12 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 import { fetchMovieSearch } from "../../modules/fetchers";
-import FilmSearchResultCard from "./FilmSearchResultCard";
-import styles from "./AddFilmSheet.module.css";
+import FilmSearchResultsCard from "./FilmSearchResultsCard";
+import styles from "./AddToWatchlistSheet.module.css";
 
-export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
+export default function AddToWatchlistSheet({
+  watchlist,
+  isOpen,
+  onClose,
+  onAdd,
+}) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   // ===== Drag-to-close logic =====
   const sheetRef = useRef(null);
@@ -57,6 +63,7 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
     e.preventDefault();
     if (!query.trim()) return;
     setLoading(true);
+    setHasSearched(true);
     try {
       const data = await fetchMovieSearch(query);
       setResults(data.results.slice(0, 10));
@@ -75,10 +82,12 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
   function handleClose() {
     setQuery("");
     setResults([]);
+    setHasSearched(false);
     onClose();
   }
 
   if (!isOpen) return null;
+
   return (
     <div className={styles.backdrop} onClick={handleClose}>
       <div
@@ -90,28 +99,74 @@ export default function AddFilmSheet({ isOpen, onClose, onAdd }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div ref={handleRef} className={styles.dragHandle} />
-        <h2>Add a Film</h2>
-        <form onSubmit={handleSearch} className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="Search films..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button type="submit">Search</button>
+        <div ref={handleRef} className={styles.dragHandle}>
+          <div className={styles.dragPill}></div>
+        </div>
+
+        <div className={styles.header}>
+          <h2 className={styles.title}>Add to Watchlist</h2>
+          <button
+            className={styles.closeBtn}
+            onClick={handleClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+
+        <form onSubmit={handleSearch} className={styles.searchForm}>
+          <div className={styles.searchBar}>
+            <input
+              type="text"
+              placeholder="Search films..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className={styles.searchInput}
+              autoComplete="off"
+              autoCapitalize="none"
+            />
+            <button
+              type="submit"
+              className={styles.searchButton}
+              disabled={!query.trim() || loading}
+            >
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </div>
         </form>
 
-        {loading && <p className={styles.loading}>Searching…</p>}
+        {loading && (
+          <div className={styles.loadingContainer}>
+            <p className={styles.loading}>Searching films...</p>
+          </div>
+        )}
 
         <div className={styles.results}>
-          {results.map((movie) => (
-            <FilmSearchResultCard
-              key={movie.id}
-              movie={movie}
-              onAdd={() => handleAdd(movie)}
-            />
-          ))}
+          {results.length > 0 && (
+            <div className={styles.resultsHeader}>
+              <span className={styles.resultsCount}>
+                {results.length} results
+              </span>
+            </div>
+          )}
+
+          <div className={styles.resultsList}>
+            {results.map((movie) => (
+              <FilmSearchResultsCard
+                watchlist={watchlist}
+                key={movie.id}
+                movie={movie}
+                onAdd={() => handleAdd(movie)}
+              />
+            ))}
+          </div>
+
+          {results.length === 0 && hasSearched && !loading && (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyText}>No films found</p>
+              <p className={styles.emptySub}>Try adjusting your search terms</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

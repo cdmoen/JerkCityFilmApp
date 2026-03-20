@@ -42,17 +42,20 @@ export function topThreeStars(movie) {
   return names;
 }
 
-// Takes in movieInfo object and returns director
+// Takes in movieInfo object and returns director name (string or null)
 export function director(movie) {
   const crew = movie.credits.crew;
-  const directors = crew.map((member) =>
-    member.job === "Director" ? member.name : null,
-  );
   const director = crew.find((member) => member.job === "Director");
-  if (!director) {
-    return null;
-  }
+  if (!director) return null;
   return director.name;
+}
+
+// Takes in movieInfo object and returns { name, id } for the director, or null
+export function directorWithID(movie) {
+  const crew = movie.credits.crew;
+  const director = crew.find((member) => member.job === "Director");
+  if (!director) return null;
+  return { name: director.name, id: director.id };
 }
 
 // Takes in movieInfo object and returns youtube embed code for best quality

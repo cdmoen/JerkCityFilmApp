@@ -7,30 +7,38 @@ export default function OutgoingInvitesList({
   uid,
   cancelGroupInvite,
 }) {
-  if (Object.keys(outgoingInvites).length === 0)
-    return <p className={styles.empty}>No pending invites.</p>;
+  const entries = Object.entries(outgoingInvites);
+
+  if (entries.length === 0) {
+    return <p className={styles.empty}>No pending invitations.</p>;
+  }
 
   return (
-    <ul className={styles.list}>
-      {Object.entries(outgoingInvites).map(([groupId, invitedUsers]) => {
+    <div className={styles.list}>
+      {entries.flatMap(([groupId, invitedUsers]) => {
         const group = userGroupMap[groupId];
-        const groupName = group?.name || groupId;
+        const groupName = group?.name ?? groupId;
 
-        return Object.keys(invitedUsers).map((friendUid) => (
-          <li key={`${groupId}-${friendUid}`} className={styles.listItem}>
-            <span className={styles.groupName}>
-              {groupName} ➡️ {friends.find((i) => i.uid === friendUid)?.username}
-            </span>
+        return Object.keys(invitedUsers).map((friendUid) => {
+          const friendName =
+            friends.find((f) => f.uid === friendUid)?.username ?? friendUid;
 
-            <button
-              className={styles.rejectButton}
-              onClick={() => cancelGroupInvite(uid, groupId, friendUid)}
-            >
-              Cancel
-            </button>
-          </li>
-        ));
+          return (
+            <div key={`${groupId}-${friendUid}`} className={styles.item}>
+              <div className={styles.itemInfo}>
+                <p className={styles.itemName}>{groupName}</p>
+                <p className={styles.itemMeta}>Invited {friendName}</p>
+              </div>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => cancelGroupInvite(uid, groupId, friendUid)}
+              >
+                Cancel
+              </button>
+            </div>
+          );
+        });
       })}
-    </ul>
+    </div>
   );
 }

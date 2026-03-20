@@ -1,16 +1,14 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-2);
 }
 
 .empty {
-  color: #888;
-  font-style: italic;
-  margin-top: 8px;
-}
-
-.loading {
-  color: #666;
-  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-tertiary);
+  font-weight: var(--weight-light);
+  margin: 0;
+  padding: var(--space-4) 0;
 }

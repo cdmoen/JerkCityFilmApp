@@ -1,4 +1,10 @@
+const AUTH_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNDRhMzU5M2M5M2ExYjA4M2Q2ZmNjYjE1Mzk1Zjc5ZCIsIm5iZiI6MTc3MTYxNDI2NS4wMjgsInN1YiI6IjY5OThiMDM5NDlkODE1ZDRiY2M5OWNjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-4R9PwE931m9oQjt5seK2Opvw6erzfZX47c7CPGYxgw";
+
 /*
+
+
+
 
 How API Requests Work in This Project
 All network requests to The Movie Database (TMDB) are routed through Vercel Serverless Functions located in the /api directory. 
@@ -52,19 +58,38 @@ This fetcher takes in a movie string param and returns a list of TMDB movies wit
     },
  */
 
-export async function fetchMovieSearch(searchParams) {
-  // Build the URL for your Vercel API route
-  const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
-    searchParams,
-  )}&include_adult=false&language=en-US&page=1`;
+// export async function fetchMovieSearch(searchParams) {
+//   // Build the URL for your Vercel API route
+//   const url = `/api/tmdb?path=search/movie&query=${encodeURIComponent(
+//     searchParams,
+//   )}&include_adult=false&language=en-US&page=1`;
 
-  const response = await fetch(url);
+//   const response = await fetch(url);
+
+//   if (!response.ok) {
+//     throw new Error("fetchMovieSearch failed");
+//   }
+
+//   console.log("fetchMovieSearch successful");
+//   return await response.json();
+// }
+
+export async function fetchMovieSearch(searchParams) {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(searchParams)}&include_adult=false&language=en-US&page=1`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${AUTH_TOKEN}`,
+    },
+  });
 
   if (!response.ok) {
+    console.log(response.statusText);
+
     throw new Error("fetchMovieSearch failed");
   }
 
-  console.log("fetchMovieSearch successful");
   return await response.json();
 }
 
@@ -169,14 +194,31 @@ This fetcher takes in a single TMDB movieID and returns the following informatio
 }
 */
 
-export async function fetchMovieDetails(movieID) {
-  const response = await fetch(
-    `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos,images&language=en-US`,
-  );
+// export async function fetchMovieDetails(movieID) {
+//   const response = await fetch(
+//     `/api/tmdb?path=movie/${movieID}&append_to_response=credits,videos,images&language=en-US`,
+//   );
+
+//   if (!response.ok) {
+//     throw new Error("fetchCredits failed");
+//   }
+//   const movieInfo = await response.json();
+//   return movieInfo;
+// }
+
+export async function fetchMovieDetails(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits,recommendations,videos,images&language=en-US`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${AUTH_TOKEN}`,
+    },
+  });
 
   if (!response.ok) {
-    throw new Error("fetchCredits failed");
+    throw new Error("fetchMovieDetails failed");
   }
-  const movieInfo = await response.json();
-  return movieInfo;
+
+  return await response.json();
 }

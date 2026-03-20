@@ -1,71 +1,94 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import NavFriends from "./NavFriends";
-import NavGroups from "./NavGroups";
+import { useAddButton } from "../../contexts/AddButtonContext";
+import NavSocial from "./NavSocial";
 import styles from "./NavBar.module.css";
-import { useTheme } from "../../contexts/ThemeContext.jsx";
 
 export default function NavBar() {
-  const { user, profile, logout, loading } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+  const { action } = useAddButton();
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!user) {
+    return null; // Don't show nav when not logged in
   }
 
   return (
-    <>
-      <nav className={styles.navbar}>
-        <NavLink to="/home">
-          <picture>
-            <source
-              media="(max-width: 390px)"
-              srcSet="/images/logo-f-play.png"
-            />
-            <source
-              media="(min-width: 391px)"
-              srcSet="/images/logo-flickd-play.png"
-            />
-            <img
-              src="/images/logo-f-play.png"
-              alt="Logo"
-              title="Flickd Home"
-              className={styles.logo}
-            />
-          </picture>
-        </NavLink>
-
-        <NavFriends />
-
-        <NavGroups />
-
-        <NavLink
-          to="/movies"
-          className={({ isActive }) =>
-            isActive ? `${styles.link} ${styles.active}` : styles.link
-          }
+    <nav className={styles.navbar}>
+      <NavLink
+        to="/home"
+        className={({ isActive }) =>
+          `${styles.navItem} ${isActive ? styles.active : ""}`
+        }
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <img
-            src="/images/search.png"
-            alt="Search Icon"
-            title="Search Movies"
-            className={styles.searchIcon}
-          />
-          <span className={styles.linkText}>Search</span>
-        </NavLink>
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+        </svg>
+        <span className={styles.navLabel}>Watchlist</span>
+      </NavLink>
 
-        <span className={styles.loginStatus}>
-          Welcome, {profile?.username}!
-        </span>
+      <NavSocial />
 
-        <button className={styles.themeToggle} onClick={toggleTheme}>
-          {theme === "light" ? "🌙" : "☀️"}
+      {action && (
+        <button className={styles.addButton} onClick={action}>
+          <span className={styles.addButtonIcon}>+</span>
         </button>
+      )}
 
-        <span className={styles.logoutBtn} onClick={logout}>
-          Logout
-        </span>
-      </nav>
-    </>
+      <NavLink
+        to="/movies"
+        className={({ isActive }) =>
+          `${styles.navItem} ${isActive ? styles.active : ""}`
+        }
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <span className={styles.navLabel}>Search</span>
+      </NavLink>
+
+      <NavLink
+        to="/account"
+        className={({ isActive }) =>
+          `${styles.navItem} ${isActive ? styles.active : ""}`
+        }
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        <span className={styles.navLabel}>Account</span>
+      </NavLink>
+    </nav>
   );
 }

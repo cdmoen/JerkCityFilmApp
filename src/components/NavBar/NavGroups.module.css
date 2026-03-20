@@ -1,65 +1,98 @@
-/* ── Shared styles ── */
+/* Nav Item Styles - matches NavBar structure */
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  min-height: 44px; /* Touch target size */
+  padding: var(--space-1);
+  position: relative;
+}
 
-.groupsButton {
+.navItem:hover {
+  color: var(--color-text-secondary);
+}
+
+.navItem.active {
+  color: var(--color-accent);
+}
+
+.navLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+}
+
+/* Icon Container - needed for badge positioning */
+.iconContainer {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  position: relative;
-  text-decoration: none;
-  color: var(--color-text-primary);
-  font-size: 1.05rem;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
+  justify-content: center;
 }
 
-.groupsButton:hover {
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-}
-
-.linkText {
-  display: none;
-}
-
-.groupsIcon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
+/* Badge Styles */
 .badge {
   position: absolute;
-  top: 15px;
-  right: 1px;
-  width: 8px;
-  height: 8px;
-  background: red;
-  border-radius: 50%;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 0 1px var(--color-background); /* Subtle outline for contrast */
+  animation: badgeIn 0.2s cubic-bezier(0.32, 0.72, 0, 1) forwards;
 }
 
-.pending {
-  font-weight: 600;
+/* Badge animation */
+@keyframes badgeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.active {
-  background: var(--color-surface);
+/* Subtle pulse animation for new notifications */
+@media (prefers-reduced-motion: no-preference) {
+  .badge {
+    animation:
+      badgeIn 0.2s cubic-bezier(0.32, 0.72, 0, 1) forwards,
+      badgePulse 2s ease-in-out 0.5s;
+  }
 }
 
-
-/* ── max 320px ── */
-@media screen and (max-width: 320px) {
-  .groupsIcon { width: 1.5rem; height: 1.5rem; }
+@keyframes badgePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
-/* ── 321px – 767px ── */
-@media screen and (min-width: 321px) and (max-width: 767px) {
-  .groupsIcon { width: 2rem; height: 2rem; }
+/* When the nav item is active, make badge slightly more prominent */
+.navItem.active .badge {
+  box-shadow:
+    0 0 0 1px var(--color-background),
+    0 0 4px rgba(230, 220, 200, 0.3);
 }
 
-/* ── 768px and up ── */
-@media screen and (min-width: 768px) {
-  .linkText { display: inline; }
-  .groupsIcon { width: 40px; height: 40px; }
+/* Responsive adjustments */
+@media (max-width: 320px) {
+  .badge {
+    width: 5px;
+    height: 5px;
+    top: -1px;
+    right: -1px;
+  }
 }

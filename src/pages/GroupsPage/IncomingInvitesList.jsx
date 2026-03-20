@@ -8,42 +8,43 @@ export default function IncomingInvitesList({
   acceptGroupInvite,
   rejectGroupInvite,
 }) {
-  if (Object.keys(incomingInvites).length === 0)
-    return <p className={styles.empty}>No group invites.</p>;
+  const entries = Object.entries(incomingInvites);
+
+  if (entries.length === 0) {
+    return <p className={styles.empty}>No pending group invites.</p>;
+  }
 
   return (
-    <ul className={styles.list}>
-      {Object.entries(incomingInvites).map(([inviteId, invite]) => {
-        const groupId = invite.groupId;
+    <div className={styles.list}>
+      {entries.map(([groupId, invite]) => {
         const group = incomingInviteGroups[groupId];
-        const groupName = group?.name || groupId;
-
+        const groupName = group?.name ?? "A group";
         const inviter =
-          friends.find((f) => f.uid === invite.from)?.username || invite.from;
+          friends.find((f) => f.uid === invite.from)?.username ?? "Someone";
 
         return (
-          <li key={inviteId} className={styles.listItem}>
-            <span className={styles.groupName}>
-              {inviter} has invited you to join: {groupName}
-            </span>
-
-            <div className={styles.buttonRow}>
+          <div key={groupId} className={styles.item}>
+            <div className={styles.itemInfo}>
+              <p className={styles.itemName}>{groupName}</p>
+              <p className={styles.itemMeta}>Invited by {inviter}</p>
+            </div>
+            <div className={styles.itemActions}>
               <button
-                className={styles.acceptButton}
+                className={styles.acceptBtn}
                 onClick={() => acceptGroupInvite(uid, groupId)}
               >
-                Accept
+                Join
               </button>
               <button
-                className={styles.rejectButton}
+                className={styles.rejectBtn}
                 onClick={() => rejectGroupInvite(uid, groupId)}
               >
-                Reject
+                Decline
               </button>
             </div>
-          </li>
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 }

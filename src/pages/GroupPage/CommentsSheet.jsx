@@ -8,7 +8,7 @@ export default function CommentsSheet({
   isOpen,
   onClose,
   groupId,
-  filmId,
+  film,
   uid,
   profile,
 }) {
@@ -16,27 +16,27 @@ export default function CommentsSheet({
   const [text, setText] = useState("");
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !film) return;
     const commentsRef = ref(
       database,
-      `groups/${groupId}/films/${filmId}/comments`,
+      `groups/${groupId}/films/${film.id}/comments`
     );
     return onValue(commentsRef, (snap) => {
       setComments(snap.exists() ? Object.values(snap.val()) : []);
     });
-  }, [isOpen, groupId, filmId]);
+  }, [isOpen, groupId, film]);
 
   function addComment() {
-    if (!text.trim()) return;
+    if (!text.trim() || !profile) return;
     const commentsRef = ref(
       database,
-      `groups/${groupId}/films/${filmId}/comments`,
+      `groups/${groupId}/films/${film.id}/comments`
     );
     push(commentsRef, {
       uid,
-      text,
+      text: text.trim(),
       username: profile.username,
-      avatarUrl: profile.avatarUrl,
+      avatarUrl: profile.avatarUrl ?? null,
       timestamp: Date.now(),
     });
     setText("");
@@ -49,7 +49,7 @@ export default function CommentsSheet({
     }
   }
 
-  if (!isOpen) return null;
+  if (!isOpen || !film) return null;
 
   return (
     <div className={styles.backdrop} onClick={onClose}>
@@ -57,29 +57,35 @@ export default function CommentsSheet({
         <div className={styles.handle} />
 
         <div className={styles.header}>
-          <p className={styles.eyebrow}>Discussion</p>
-          <div className={styles.titleRow}>
-            <h2 className={styles.title}>Comments</h2>
-            <button className={styles.backBtn} onClick={onClose}>
-              ← Back
+          <div className={styles.headerTop}>
+            <p className={styles.eyebrow}>Discussion</p>
+            <button className={styles.closeBtn} onClick={onClose}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
+          <h2 className={styles.title}>{film.title}</h2>
         </div>
 
         <div className={styles.list}>
           {comments.length === 0 ? (
-            <p className={styles.empty}>
-              No comments yet. Start the conversation.
-            </p>
+            <p className={styles.empty}>No comments yet. Start the conversation.</p>
           ) : (
-            comments.map((c, i) => (
-              <CommentCard
-                key={i}
-                avatarUrl={c.avatarUrl || null}
-                username={c.username || c.uid}
-                text={c.text}
-              />
-            ))
+            comments
+              .sort((a, b) => (a.timestamp ?? 0) - (b.timestamp ?? 0))
+              .map((c, i) => (
+                <CommentCard
+                  key={i}
+                  avatarUrl={c.avatarUrl ?? null}
+                  username={c.username ?? c.uid}
+                  text={c.text}
+                  isOwn={c.uid === uid}
+                />
+              ))
           )}
         </div>
 

@@ -16,7 +16,6 @@ export default function NavGroups() {
 
     const unsubscribe = onValue(inviteRef, (snap) => {
       const data = snap.val();
-
       setHasInvites(data && Object.keys(data).length > 0);
     });
 
@@ -27,19 +26,26 @@ export default function NavGroups() {
     <NavLink
       to="/groups"
       className={({ isActive }) =>
-        `${styles.groupsButton} 
-         ${hasInvites ? styles.pending : ""} 
-         ${isActive ? styles.active : ""}`
+        `${styles.navItem} ${isActive ? styles.active : ""}`
       }
     >
-      <img
-        src="/images/roll.png"
-        alt="Groups Icon"
-        title="Groups"
-        className={styles.groupsIcon}
-      />
-      <span className={styles.linkText}>Groups</span>
-      {hasInvites && <span className={styles.badge}></span>}
+      <div className={styles.iconContainer}>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        {hasInvites && <span className={styles.badge}></span>}
+      </div>
+      <span className={styles.navLabel}>Groups</span>
     </NavLink>
   );
 }

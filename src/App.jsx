@@ -10,10 +10,12 @@ import MovieSearchPage from "./pages/MovieSearchPage/MovieSearchPage";
 import FriendsPage from "./pages/FriendsPage/FriendsPage";
 import NavBar from "./components/NavBar/NavBar";
 import GroupsPage from "./pages/GroupsPage/GroupsPage";
+import DirectorPage from "./pages/DirectorPage/DirectorPage";
 import Layout from "./components/Layout/Layout";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import HomePage from "./pages/HomePage/HomePage";
 import GroupPage from "./pages/GroupPage/GroupPage";
+import SocialPage from "./pages/SocialPage/SocialPage";
 
 function App() {
   const { user } = useAuth();
@@ -31,7 +33,9 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/movies" element={<MovieSearchPage />} />
             <Route path="/movies/:movieID" element={<MoviePage />} />
+            <Route path="/directors/:directorID" element={<DirectorPage />} />
             <Route path="/friends" element={<FriendsPage />} />
+            <Route path="/social" element={<SocialPage />} />
             <Route path="/groups" element={<GroupsPage />} />
             <Route path="/groups/:groupId" element={<GroupPage />} />
           </Route>
